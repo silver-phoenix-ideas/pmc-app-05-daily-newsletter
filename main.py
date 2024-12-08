@@ -1,8 +1,11 @@
+# Imports
 import os
+import sys
 import smtplib
 import requests
 import modules.email_utils as email_utils
 
+# Configurations
 topic = "Disney Sales"
 language = "en"
 start_date = "2024-12-07"
@@ -16,10 +19,17 @@ params = {
     "apiKey": os.getenv("NEWS_API_KEY")
 }
 
+# Request
 response = requests.get(endpoint, params)
 content = response.json()
 
 print()
+
+# Exit if No Results
+if not content["articles"]:
+    print("Newsletter not sent.")
+    print("There are no articles.")
+    sys.exit()
 
 # Newsletter
 newsletter = f"Daily {topic} Newsletter\n\n"
