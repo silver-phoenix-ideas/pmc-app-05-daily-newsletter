@@ -35,9 +35,10 @@ if not content["articles"]:
 newsletter = f"Daily {topic} Newsletter\n\n"
 
 for article in content["articles"]:
-    newsletter += article["title"] + "\n"
-    newsletter += article["description"] + "\n"
-    newsletter += "Read More: " + article["url"] + "\n\n"
+    title = article["title"] or "[Missing Title]"
+    description = article["description"] or "[Missing Description]"
+    url = article["url"] or "[Missing URL]"
+    newsletter += f"{title}\n{description}\nRead More: {url}\n\n"
 
 # Send to Email
 try:
