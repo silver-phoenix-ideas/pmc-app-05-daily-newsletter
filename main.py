@@ -1,6 +1,7 @@
 # Imports
 import os
 import sys
+import time
 import smtplib
 import requests
 import modules.email_utils as email_utils
@@ -8,7 +9,7 @@ import modules.email_utils as email_utils
 # Configurations
 topic = "Disney Sales"
 language = "en"
-start_date = "2024-12-07"
+start_date = time.strftime("%Y-%m-%d")
 sort_by = "relevancy"
 endpoint = "https://newsapi.org/v2/everything"
 params = {
