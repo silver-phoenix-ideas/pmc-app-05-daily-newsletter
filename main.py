@@ -1,5 +1,7 @@
 import os
+import smtplib
 import requests
+import modules.email_utils as email_utils
 
 topic = "Disney Sales"
 language = "en"
@@ -17,5 +19,30 @@ params = {
 response = requests.get(endpoint, params)
 content = response.json()
 
+print()
+
+# Newsletter
+newsletter = f"Daily {topic} Newsletter\n\n"
+
 for article in content["articles"]:
-    print("\n" + article["title"])
+    newsletter += article["title"] + "\n"
+    newsletter += article["description"] + "\n"
+    newsletter += "Read More: " + article["url"] + "\n\n"
+
+# Send to Email
+try:
+    email_utils.send_newsletter(topic, newsletter)
+    print("Newsletter sent successfully.")
+
+except smtplib.SMTPResponseException as e:
+    print("Newsletter couldn't be sent.")
+
+    match e.smtp_code:
+        case 334:
+            print("Authentication credentials missing.")
+        case 535:
+            print("Authentication credentials invalid.")
+
+except smtplib.SMTPRecipientsRefused as e:
+    print("Newsletter couldn't be sent.")
+    print("Recipient address invalid.")
