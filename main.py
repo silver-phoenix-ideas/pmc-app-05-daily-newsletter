@@ -36,6 +36,9 @@ if not content["articles"]:
 newsletter = f"Daily {topic} Newsletter\n\n"
 
 for article in content["articles"]:
+    if article["source"]["name"] == "[Removed]":
+        continue
+
     title = article["title"] or "[Missing Title]"
     description = article["description"] or "[Missing Description]"
     url = article["url"] or "[Missing URL]"
