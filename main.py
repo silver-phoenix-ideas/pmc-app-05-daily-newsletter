@@ -1,17 +1,17 @@
 # Imports
 import os
 import sys
-import time
 import dotenv
 import smtplib
 import requests
+import datetime
 import modules.email_utils as email_utils
 
 # Configurations
 dotenv.load_dotenv(".env")
 topic = "Disney Sales"
 language = "en"
-start_date = time.strftime("%Y-%m-%d")
+start_date = datetime.datetime.now() - datetime.timedelta(1)
 sort_by = "relevancy"
 endpoint = "https://newsapi.org/v2/everything"
 params = {
