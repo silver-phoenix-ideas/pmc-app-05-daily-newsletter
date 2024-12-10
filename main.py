@@ -2,11 +2,13 @@
 import os
 import sys
 import time
+import dotenv
 import smtplib
 import requests
 import modules.email_utils as email_utils
 
 # Configurations
+dotenv.load_dotenv(".env")
 topic = "Disney Sales"
 language = "en"
 start_date = time.strftime("%Y-%m-%d")
